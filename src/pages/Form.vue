@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div class="min-h-full"></div>
 </template>
 
 <script>

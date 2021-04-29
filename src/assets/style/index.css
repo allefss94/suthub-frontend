@@ -8,3 +8,10 @@
 .fade-leave-to {
   opacity: 0;
 }
+body {
+  overflow-x: hidden;
+}
+
+.min-height {
+  min-height: 500px;
+}

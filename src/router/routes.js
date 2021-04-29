@@ -13,5 +13,15 @@ export const routes = [
     path: '/paises',
     name: 'Countries',
     component: () => import('@/pages/Countries')
+  },
+  {
+    path: '/regiao/:region',
+    name: 'RegionCountries',
+    component: () => import('@/pages/RegionCountries')
+  },
+  {
+    path: '/language/:name',
+    name: 'Language',
+    component: () => import('@/pages/Languages')
   }
 ]
