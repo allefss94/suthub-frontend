@@ -3,7 +3,7 @@
     <input
       type="text"
       class="mt-10 w-6/12 px-5 py-3 rounded-md shadow-md focus:outline-none text-gray-400"
-      placeholder="Buscar País (Primeira letra Maiúscula)"
+      placeholder="Buscar País (Lembre-se da acentuação se houver)"
       v-model="searchCountry"
     />
 
@@ -54,7 +54,9 @@ export default {
         )
       } else {
         filteredCountry = this.allCountries.filter(country =>
-          country.translations.br.includes(this.searchCountry)
+          country.translations.br
+            .toLowerCase()
+            .includes(this.searchCountry.toLowerCase())
         )
       }
       return filteredCountry
