@@ -7,7 +7,6 @@
 
 <script>
 import CountryInfo from '@/components/CountryInfo'
-import axios from 'axios'
 export default {
   name: 'RegionCountries',
 
@@ -18,7 +17,7 @@ export default {
   }),
 
   created() {
-    axios
+    this.$axios
       .get(`https://restcountries.eu/rest/v2/lang/${this.$route.params.name}`)
       .then(response => (this.countries = response.data))
   }

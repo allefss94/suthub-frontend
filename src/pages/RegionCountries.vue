@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import CountryInfo from '@/components/CountryInfo'
 import { mapGetters } from 'vuex'
 export default {
@@ -23,7 +22,7 @@ export default {
   },
 
   created() {
-    axios
+    this.$axios
       .get(
         `https://restcountries.eu/rest/v2/region/${this.$route.params.region}`
       )

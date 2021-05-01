@@ -9,13 +9,7 @@ export default new Vuex.Store({
     countries: []
   }),
   getters: {
-    getCountries: state => state.countries,
-
-    getCountry: state => countryName =>
-      state.countries.filter(country => country.translations.br === countryName),
-
-    getCountryForRegion: state => region =>
-      state.countries.filter(country => country.region == region)
+    getCountries: state => state.countries
   },
   mutations: {
     CACHE_COUNTRIES(state, data) {
