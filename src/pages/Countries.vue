@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center">
     <input
       type="text"
-      class="w-6/12 px-5 py-3 mt-10 text-gray-400 rounded-md shadow-md focus:outline-none"
+      class="w-10/12 px-5 py-3 mt-10 text-gray-400 rounded-md shadow-md md:w-6/12 focus:outline-none"
       placeholder="Buscar País (Lembre-se da acentuação se houver)"
       v-model="searchCountry"
     />
