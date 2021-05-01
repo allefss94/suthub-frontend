@@ -3,8 +3,9 @@
     <h1 class="mt-5 text-3xl">Preencha os campos a seguir</h1>
     <form
       @submit.prevent="submitForm"
-      class="grid justify-center w-full grid-cols-1 gap-5 my-5 text-gray-600 lg:grid-cols-2 lg:w-3/4 lg:justify-start"
+      class="grid items-end justify-center w-full grid-cols-1 gap-5 my-5 text-gray-600 lg:grid-cols-2 lg:w-3/4 lg:justify-start"
     >
+      <!-- Nome -->
       <div class="flex flex-col field">
         <label for="nome">Nome</label>
         <input
@@ -28,13 +29,14 @@
         </p>
       </div>
 
+      <!-- Data de Nascimento -->
       <div class="flex flex-col field">
         <label for="idade">Data de Nascimento</label>
         <input
           v-mask="'##/##/####'"
           type="text"
           name="idade"
-          v-model="form.idade"
+          v-model="form.dataDeNascimento"
           placeholder="00/00/0000"
           class="px-2 py-1 rounded shadow focus:outline-none"
         />
@@ -42,26 +44,32 @@
         <p
           class="font-light text-red-400 text-md"
           v-if="
-            (!$v.form.idade.required || !$v.form.idade.minLength) &&
-            $v.form.idade.$dirty
+            (!$v.form.dataDeNascimento.required ||
+              !$v.form.dataDeNascimento.minLength) &&
+            $v.form.dataDeNascimento.$dirty
           "
         >
           Informe uma data válida.
         </p>
         <p
           class="font-light text-red-400 text-md"
-          v-else-if="!$v.form.idade.minAge && $v.form.idade.$dirty"
+          v-else-if="
+            !$v.form.dataDeNascimento.minAge && $v.form.dataDeNascimento.$dirty
+          "
         >
           Idade minima de 18 anos.
         </p>
         <p
           class="font-light text-red-400 text-md"
-          v-else-if="!$v.form.idade.maxAge && $v.form.idade.$dirty"
+          v-else-if="
+            !$v.form.dataDeNascimento.maxAge && $v.form.dataDeNascimento.$dirty
+          "
         >
           Idade máxima de 65 anos.
         </p>
       </div>
 
+      <!-- PET -->
       <div class="flex flex-col field">
         <label for="pet">Pet</label>
         <select
@@ -84,6 +92,7 @@
         </p>
       </div>
 
+      <!-- Raça -->
       <div>
         <transition name="fade" mode="out-in" appear>
           <div v-if="hasSelectedPet" class="flex flex-col field">
@@ -117,9 +126,17 @@
               v-model="form.raca"
               class="px-2 py-1 rounded shadow focus:outline-none"
             />
+            <p
+              class="font-light text-red-400 text-md"
+              v-if="!$v.form.raca.required && $v.form.raca.$dirty"
+            >
+              Compo Obrigatório.
+            </p>
           </div>
         </transition>
       </div>
+
+      <!-- Renda Mensal -->
       <div class="flex flex-col field">
         <label for="renda">Renda Mensal</label>
         <CurrencyInput
@@ -130,48 +147,50 @@
           class="font-light text-red-400 text-md"
           v-if="!$v.form.rendaMensal.minValue && $v.form.rendaMensal.$dirty"
         >
-          O valor minimo é R$ 1.000,00.
+          Valor minimo R$ 1.000,00.
         </p>
       </div>
-      <div class="flex items-end">
-        <div class="flex flex-col flex-1">
-          <label for="cep">CEP</label>
+
+      <!-- CEP -->
+      <div class="flex flex-col">
+        <label for="cep">CEP</label>
+        <div class="flex">
           <input
             v-mask="'#####-###'"
             type="text"
             v-model="form.endereco.cep"
-            class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+            class="flex-1 px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
           />
-          <p
-            class="font-light text-red-400 text-md"
-            v-if="!$v.form.endereco.cep.required && $v.form.endereco.cep.$dirty"
-          >
-            Informe seu CEP.
-          </p>
-          <p
-            class="font-light text-red-400 text-md"
-            v-if="
-              !$v.form.endereco.cep.minLength && $v.form.endereco.cep.$dirty
+
+          <button
+            type="button"
+            :disabled="form.endereco.cep.length < 9"
+            @click="searchCep"
+            :class="
+              form.endereco.cep.length < 9
+                ? 'bg-gray-400 shadow cursor-not-allowed'
+                : 'bg-green-600 hover:bg-green-700 transition'
             "
+            class="px-1.5 text-sm h-8 ml-2 rounded focus:outline-none text-white whitespace-nowrap"
           >
-            O CEP deve conter no 9 numeros.
-          </p>
+            O
+          </button>
         </div>
-        <button
-          type="button"
-          :disabled="form.endereco.cep.length < 9"
-          @click="searchCep"
-          :class="
-            form.endereco.cep.length < 9
-              ? 'bg-gray-400 shadow cursor-not-allowed'
-              : 'bg-green-600 hover:bg-green-700 transition'
-          "
-          class="px-1.5 text-sm h-8 ml-2 rounded focus:outline-none text-white whitespace-nowrap"
+        <p
+          class="font-light text-red-400 text-md"
+          v-if="!$v.form.endereco.cep.required && $v.form.endereco.cep.$dirty"
         >
-          O
-        </button>
+          Informe seu CEP.
+        </p>
+        <p
+          class="font-light text-red-400 text-md"
+          v-if="!$v.form.endereco.cep.minLength && $v.form.endereco.cep.$dirty"
+        >
+          O CEP deve conter no 9 numeros.
+        </p>
       </div>
 
+      <!-- Estado -->
       <div class="flex flex-col field">
         <label for="estado">Estado</label>
         <input
@@ -190,6 +209,7 @@
         </p>
       </div>
 
+      <!-- Cidade -->
       <div class="flex flex-col field">
         <label for="cidade">Cidade</label>
         <input
@@ -208,6 +228,7 @@
         </p>
       </div>
 
+      <!-- Logradouro -->
       <div class="flex flex-col field">
         <label for="logradouro">Logradouro</label>
         <input
@@ -227,6 +248,7 @@
         </p>
       </div>
 
+      <!-- Bairro -->
       <div class="flex flex-col field">
         <label for="bairro">Bairro</label>
         <input
@@ -245,8 +267,9 @@
         </p>
       </div>
 
+      <!-- Complemento -->
       <div class="flex flex-col field">
-        <label for="complemento">Complemento</label>
+        <label for="complemento">Complemento (Opicional)</label>
         <input
           type="text"
           name="complemento"
@@ -280,7 +303,7 @@ export default {
   data: () => ({
     form: {
       nome: '',
-      idade: '',
+      dataDeNascimento: '',
       pet: '',
       raca: '',
       rendaMensal: 0,
@@ -305,7 +328,7 @@ export default {
   validations: {
     form: {
       nome: { required, secondNameValidation },
-      idade: { required, minLength: minLength(10), minAge, maxAge },
+      dataDeNascimento: { required, minLength: minLength(10), minAge, maxAge },
       pet: { required },
       raca: { required },
       rendaMensal: { minValue: minValue(1000) },
@@ -343,8 +366,16 @@ export default {
     submitForm() {
       this.$v.$touch()
 
-      if (this.$v.$invalid) console.log('error')
+      if (this.$v.$invalid)
+        this.$toast.open({
+          message: 'Preencha os campos obrigatórios!',
+          type: 'error'
+        })
       else {
+        this.$toast.open({
+          message: 'Formulário enviado com sucesso!',
+          type: 'success'
+        })
         console.log(this.form)
       }
     }

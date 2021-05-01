@@ -5,6 +5,7 @@ import store from './store'
 import Vuelidate from 'vuelidate'
 import '@/plugins/axios'
 import '@/plugins/currencyInput'
+import '@/plugins/toast'
 import 'tailwindcss/tailwind.css'
 import '@/assets/style/index.css'
 
