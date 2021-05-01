@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <h1 class="text-3xl my-10">Países com o mesmo Idioma</h1>
+    <h1 class="my-10 text-3xl">Países com o mesmo Idioma</h1>
     <CountryInfo :countriesList="countries" />
   </div>
 </template>

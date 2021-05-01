@@ -2,20 +2,20 @@
   <div class="flex flex-col items-center">
     <input
       type="text"
-      class="mt-10 w-6/12 px-5 py-3 rounded-md shadow-md focus:outline-none text-gray-400"
+      class="w-6/12 px-5 py-3 mt-10 text-gray-400 rounded-md shadow-md focus:outline-none"
       placeholder="Buscar País (Lembre-se da acentuação se houver)"
       v-model="searchCountry"
     />
 
     <CountriesList :countriesList="countries" />
 
-    <div class="divider h-1 w-full border-2 border-gray-300 my-5"></div>
+    <div class="w-full h-1 my-5 border-2 border-gray-300 divider"></div>
 
     <div class="flex flex-col text-center">
       <h2 class="text-3xl">Busque por Região</h2>
 
       <div
-        class="buttons grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mt-10"
+        class="grid grid-cols-1 gap-10 mt-10 buttons md:grid-cols-2 lg:grid-cols-5"
       >
         <router-link
           v-for="region in regionList"

@@ -1,34 +1,34 @@
 <template>
   <div class="min-h-full">
-    <h1 class="text-3xl mt-5">Preencha os campos a seguir</h1>
+    <h1 class="mt-5 text-3xl">Preencha os campos a seguir</h1>
     <form
       @submit.prevent="submitForm"
-      class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full lg:w-3/4 justify-center lg:justify-start text-gray-600 my-5"
+      class="grid justify-center w-full grid-cols-1 gap-5 my-5 text-gray-600 lg:grid-cols-2 lg:w-3/4 lg:justify-start"
     >
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="nome">Nome</label>
         <input
           type="text"
           name="nome"
           v-model="form.nome"
           placeholder="Nome e Sobrenome"
-          class="px-2 py-1 shadow rounded focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="!$v.form.nome.required && $v.form.nome.$dirty"
         >
           Informe seu Nome.
         </p>
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-else-if="!$v.form.nome.secondNameValidation && $v.form.nome.$dirty"
         >
           Informe seu Sobrenome.
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="idade">Data de Nascimento</label>
         <input
           v-mask="'##/##/####'"
@@ -36,11 +36,11 @@
           name="idade"
           v-model="form.idade"
           placeholder="00/00/0000"
-          class="px-2 py-1 shadow rounded focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
 
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="
             (!$v.form.idade.required || !$v.form.idade.minLength) &&
             $v.form.idade.$dirty
@@ -49,20 +49,20 @@
           Informe uma data válida.
         </p>
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-else-if="!$v.form.idade.minAge && $v.form.idade.$dirty"
         >
           Idade minima de 18 anos.
         </p>
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-else-if="!$v.form.idade.maxAge && $v.form.idade.$dirty"
         >
           Idade máxima de 65 anos.
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="pet">Pet</label>
         <select
           v-model="form.pet"
@@ -71,13 +71,13 @@
           class="bg-white px-2 py-1.5 capitalize shadow text-gray-400 rounded focus:outline-none"
         >
           <option value="" disabled selected>Selecione um Pet</option>
-          <option v-for="pet in pet.tipo" :key="pet">
+          <option v-for="pet in pet.tipo" :key="pet" class="text-gray-700">
             {{ pet }}
           </option>
         </select>
 
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="!$v.form.pet.required && $v.form.pet.$dirty"
         >
           Selecrione um Pet.
@@ -86,7 +86,7 @@
 
       <div>
         <transition name="fade" mode="out-in" appear>
-          <div v-if="hasSelectedPet" class="field flex flex-col">
+          <div v-if="hasSelectedPet" class="flex flex-col field">
             <label for="raca">Raça</label>
             <select
               name="raca"
@@ -98,57 +98,58 @@
                 v-for="raca in pet.racas[`${form.pet}`]"
                 :key="raca"
                 :value="raca"
+                class="text-gray-700"
               >
                 {{ raca }}
               </option>
             </select>
             <p
-              class="text-red-400 text-md font-light"
+              class="font-light text-red-400 text-md"
               v-if="!$v.form.raca.required && $v.form.raca.$dirty"
             >
               Selecione uma Raça.
             </p>
           </div>
-          <div v-else class="field flex flex-col">
+          <div v-else class="flex flex-col field">
             <label for="otherBreed">Nos conte sobre seu Pet:</label>
             <input
               type="text"
               v-model="form.raca"
-              class="px-2 py-1 shadow rounded focus:outline-none"
+              class="px-2 py-1 rounded shadow focus:outline-none"
             />
           </div>
         </transition>
       </div>
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="renda">Renda Mensal</label>
         <CurrencyInput
           v-model="form.rendaMensal"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="!$v.form.rendaMensal.minValue && $v.form.rendaMensal.$dirty"
         >
           O valor minimo é R$ 1.000,00.
         </p>
       </div>
       <div class="flex items-end">
-        <div class="flex flex-1 flex-col">
+        <div class="flex flex-col flex-1">
           <label for="cep">CEP</label>
           <input
             v-mask="'#####-###'"
             type="text"
             v-model="form.endereco.cep"
-            class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+            class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
           />
           <p
-            class="text-red-400 text-md font-light"
+            class="font-light text-red-400 text-md"
             v-if="!$v.form.endereco.cep.required && $v.form.endereco.cep.$dirty"
           >
             Informe seu CEP.
           </p>
           <p
-            class="text-red-400 text-md font-light"
+            class="font-light text-red-400 text-md"
             v-if="
               !$v.form.endereco.cep.minLength && $v.form.endereco.cep.$dirty
             "
@@ -171,16 +172,16 @@
         </button>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="estado">Estado</label>
         <input
           v-model="form.endereco.estado"
           type="text"
           maxlength="2"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none uppercase"
+          class="px-2 py-1 text-gray-400 uppercase rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="
             !$v.form.endereco.estado.required && $v.form.endereco.estado.$dirty
           "
@@ -189,16 +190,16 @@
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="cidade">Cidade</label>
         <input
           type="text"
           name="cidade"
           v-model="form.endereco.cidade"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="
             !$v.form.endereco.cidade.required && $v.form.endereco.cidade.$dirty
           "
@@ -207,16 +208,16 @@
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="logradouro">Logradouro</label>
         <input
           type="text"
           name="logradouro"
           v-model="form.endereco.logradouro"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="
             !$v.form.endereco.logradouro.required &&
             $v.form.endereco.logradouro.$dirty
@@ -226,16 +227,16 @@
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="bairro">Bairro</label>
         <input
           type="text"
           name="bairro"
           v-model="form.endereco.bairro"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
         />
         <p
-          class="text-red-400 text-md font-light"
+          class="font-light text-red-400 text-md"
           v-if="
             !$v.form.endereco.bairro.required && $v.form.endereco.bairro.$dirty
           "
@@ -244,20 +245,20 @@
         </p>
       </div>
 
-      <div class="field flex flex-col">
+      <div class="flex flex-col field">
         <label for="complemento">Complemento</label>
         <input
           type="text"
           name="complemento"
           v-model="form.endereco.complemento"
-          class="px-2 py-1 shadow rounded text-gray-400 focus:outline-none"
+          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
         />
       </div>
 
       <div class="flex flex-col justify-end">
         <button
           type="submit"
-          class="bg-green-600 text-white rounded shadow h-8 focus:outline-none"
+          class="h-8 text-white bg-green-600 rounded shadow focus:outline-none"
         >
           Enviar Formulário
         </button>

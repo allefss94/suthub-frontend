@@ -4,7 +4,7 @@
       <div
         v-for="(country, index) in countriesList"
         :key="index"
-        class="flex flex-col w-full mt-14 text-xl font-light"
+        class="flex flex-col w-full text-xl font-light mt-14"
       >
         <img
           :src="country.flag"
@@ -12,9 +12,9 @@
           class="w-24 mx-auto mb-10"
         />
         <table
-          class="stripe hover text-center cursor-default bg-white shadow-lg"
+          class="text-center bg-white shadow-lg cursor-default stripe hover"
         >
-          <thead class="bg-gray-400 text-white">
+          <thead class="text-white bg-gray-400">
             <tr>
               <th>País</th>
               <th v-if="country.cioc">Código</th>
@@ -35,7 +35,7 @@
               <td class="px-3">
                 <p v-for="(languages, index) in country.languages" :key="index">
                   <router-link
-                    class="underline text-green-600 hover:text-green-700 transition cursor-pointer"
+                    class="text-green-600 underline transition cursor-pointer hover:text-green-700"
                     :to="{ path: `/language/${languages.iso639_1}` }"
                   >
                     {{ languages.name }}

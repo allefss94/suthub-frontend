@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <h1 class="text-3xl my-10">Países da {{ this.$route.params.region }}</h1>
+    <h1 class="my-10 text-3xl">Países da {{ this.$route.params.region }}</h1>
     <CountryInfo :countriesList="countries" />
   </div>
 </template>

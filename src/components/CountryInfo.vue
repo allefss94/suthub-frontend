@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4 gap-6"
+    class="grid items-center grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
   >
     <div v-for="country in countriesList" :key="country.name">
       <h3>{{ country.translations.br }}</h3>
