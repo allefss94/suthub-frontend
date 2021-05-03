@@ -1,24 +1,34 @@
-# suthub
+# SutHub - Front-end
 
-## Project setup
-```
-yarn install
-```
+## Tecnologias utilizadas
 
-### Compiles and hot-reloads for development
-```
+* VueJs (Vue CLI)
+* VueRouter
+* Vuex
+* Axios
+* Vue-currency-input
+* Vue-the-mask
+* Vue-toast-notification
+* Vuelidate
+* Tailwindcss
+
+## Instalando
+Clone o projeto para sua maquina, abra o terminar na pasta raiz do projeto e rode o comando:
+
+~~~javascript
+yarn
+//ou
+npm i
+~~~
+
+## Startando o projeto
+
+Ainda com o terminal aberto rode:
+
+~~~javascript
 yarn serve
-```
+//ou
+npm run serve
+~~~
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+O projeto estará disponível em http://localhost:8080

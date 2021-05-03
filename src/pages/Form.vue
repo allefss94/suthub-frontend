@@ -3,7 +3,7 @@
     <h1 class="mt-5 text-3xl">Preencha os campos a seguir</h1>
     <form
       @submit.prevent="submitForm"
-      class="grid items-end justify-center w-full grid-cols-1 gap-5 my-5 text-gray-600 lg:grid-cols-2 lg:w-3/4 lg:justify-start"
+      class="grid items-start justify-center w-full grid-cols-1 gap-5 my-5 text-gray-600 lg:grid-cols-2 lg:w-3/4 lg:justify-start"
     >
       <!-- Nome -->
       <div class="flex flex-col field">
@@ -141,7 +141,7 @@
         <label for="renda">Renda Mensal</label>
         <CurrencyInput
           v-model="form.rendaMensal"
-          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
         <p
           class="font-light text-red-400 text-md"
@@ -159,7 +159,7 @@
             v-mask="'#####-###'"
             type="text"
             v-model="form.endereco.cep"
-            class="flex-1 px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+            class="flex-1 px-2 py-1 rounded shadow focus:outline-none"
           />
 
           <button
@@ -173,7 +173,7 @@
             "
             class="px-1.5 text-sm h-8 ml-2 rounded focus:outline-none text-white whitespace-nowrap"
           >
-            O
+            Buscar
           </button>
         </div>
         <p
@@ -197,7 +197,7 @@
           v-model="form.endereco.estado"
           type="text"
           maxlength="2"
-          class="px-2 py-1 text-gray-400 uppercase rounded shadow focus:outline-none"
+          class="px-2 py-1 uppercase rounded shadow focus:outline-none"
         />
         <p
           class="font-light text-red-400 text-md"
@@ -216,7 +216,7 @@
           type="text"
           name="cidade"
           v-model="form.endereco.cidade"
-          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
         <p
           class="font-light text-red-400 text-md"
@@ -235,7 +235,7 @@
           type="text"
           name="logradouro"
           v-model="form.endereco.logradouro"
-          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
         <p
           class="font-light text-red-400 text-md"
@@ -255,7 +255,7 @@
           type="text"
           name="bairro"
           v-model="form.endereco.bairro"
-          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
         <p
           class="font-light text-red-400 text-md"
@@ -274,14 +274,14 @@
           type="text"
           name="complemento"
           v-model="form.endereco.complemento"
-          class="px-2 py-1 text-gray-400 rounded shadow focus:outline-none"
+          class="px-2 py-1 rounded shadow focus:outline-none"
         />
       </div>
 
       <div class="flex flex-col justify-end">
         <button
           type="submit"
-          class="h-8 text-white bg-green-600 rounded shadow focus:outline-none"
+          class="h-8 mt-6 text-white bg-green-600 rounded shadow focus:outline-none"
         >
           Enviar Formulário
         </button>
@@ -293,12 +293,11 @@
 <script>
 import { required, minValue, minLength } from 'vuelidate/lib/validators'
 import { secondNameValidation, minAge, maxAge } from '@/utils/customValidations'
-import { currency } from 'vue-currency-input'
 import { mask } from 'vue-the-mask'
 export default {
   name: 'Form',
 
-  directives: { mask, currency },
+  directives: { mask },
 
   data: () => ({
     form: {

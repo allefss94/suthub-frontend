@@ -60,7 +60,8 @@
           <div class="flex flex-col px-5 field">
             <h2 class="my-4 text-xl font-normal">Lat/Lon</h2>
             <span class="md:mt-1.5 text-sm tracking-wider">
-              {{ country.latlng[0] || '--' }} / {{ country.latlng[1] || '--' }}
+              {{ country.latlng[0] || '--' }} /
+              {{ country.latlng[1] || '--' }}
             </span>
           </div>
 
