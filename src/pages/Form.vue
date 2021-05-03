@@ -202,7 +202,9 @@
         <p
           class="font-light text-red-400 text-md"
           v-if="
-            !$v.form.endereco.estado.required && $v.form.endereco.estado.$dirty
+            (!$v.form.endereco.estado.required ||
+              !$v.form.endereco.estado.minLength) &&
+            $v.form.endereco.estado.$dirty
           "
         >
           Informe UF corresponde ao seu Estado.
@@ -333,7 +335,7 @@ export default {
       rendaMensal: { minValue: minValue(1000) },
       endereco: {
         cep: { required, minLength: minLength(9) },
-        estado: { required },
+        estado: { required, minLength: minLength(2) },
         cidade: { required },
         logradouro: { required },
         bairro: { required }
